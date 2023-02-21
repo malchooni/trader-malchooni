@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>trader-malchooni</title>
+    <script type="text/javascript">
+        function invoke(requestURL) {
+          if(confirm('호출?')){
+              const xhr = new XMLHttpRequest();
+              xhr.open('GET', requestURL);
+              xhr.onload = () => {
+                console.log(xhr.response);
+              };
+              xhr.send();
+          }
+        }
+
+    </script>
+    <style>
+        button { width:50px; height:30px; }
+        table {
+            border: 1px solid #444444;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #444444;
+        }
+
+    </style>
+</head>
+
+<body bgcolor="white" style="font-size:12px;">
+<div>
+    <table align="center" width="50%">
+        <tr>
+            <td>
+            <pre>
+  _                 _                                  _      _                       _
+ | |               | |                                | |    | |                     (_)
+ | |_ _ __ __ _  __| | ___ _ __ ______ _ __ ___   __ _| | ___| |__   ___   ___  _ __  _
+ | __| '__/ _` |/ _` |/ _ \ '__|______| '_ ` _ \ / _` | |/ __| '_ \ / _ \ / _ \| '_ \| |
+ | |_| | | (_| | (_| |  __/ |         | | | | | | (_| | | (__| | | | (_) | (_) | | | | |
+  \__|_|  \__,_|\__,_|\___|_|         |_| |_| |_|\__,_|_|\___|_| |_|\___/ \___/|_| |_|_|
+            </pre>
+            </td>
+        </tr>
+    </table>
+</div>
+<br/><br/>
+<div>
+    <table align="center" width="50%">
+        <tr>
+            <td colspan="2" bgcolor="#cdcdcd" align="center">한국투자증권</td>
+        </tr>
+        <tr>
+            <td>토큰 생성</td>
+            <td align="center">
+                <button onclick="invoke('/eventCall/ki/createToken')">호출</button>
+            </td>
+        </tr>
+        <tr>
+            <td>토큰 제거</td>
+            <td align="center">
+                <button onclick="invoke('/eventCall/ki/removeToken')">호출</button>
+            </td>
+        </tr>
+        <tr>
+            <td>잔고</td>
+            <td align="center">
+                <button onclick="invoke('/eventCall/ki/stockBalance')">호출</button>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

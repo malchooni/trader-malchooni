@@ -1,0 +1,21 @@
+# 한국투자증권 설정
+ki:
+  appKey: ""
+  appSecret: ""
+  accountNo: ""
+
+# 텔레그램 설정
+telegram:
+  token: ""
+  chatId: ""
+
+# 스케줄러 설정
+job:
+  cron:
+    ki:
+      # 토큰 생성
+      createToken: "0 55 8 * * MON-FRI"
+      # 토큰 폐기
+      removeToken: "0 0 18 * * MON-FRI"
+      # 잔고 확인
+      stockBalance: "10 35 15 * * MON-FRI"
