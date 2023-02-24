@@ -1,4 +1,5 @@
 server:
+  address: localhost
   port: 7772
 
 management:
