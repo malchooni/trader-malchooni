@@ -3,6 +3,8 @@ package name.malchooni.trader.ki.job;
 import lombok.extern.slf4j.Slf4j;
 import name.malchooni.trader.config.KiConfig;
 import name.malchooni.trader.config.TelegramConfig;
+import name.malchooni.trader.exception.FailedAuthenticationException;
+import name.malchooni.trader.exception.FailedResponseException;
 import name.malchooni.trader.ki.util.KiRequestHelper;
 import name.malchooni.trader.ki.vo.tttc8434r.TTTC8434RDetailDTO;
 import name.malchooni.trader.ki.vo.tttc8434r.TTTC8434RPriceDTO;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.List;
 
@@ -44,6 +47,10 @@ public class StockBalance {
      */
     public void execute() throws Exception {
 
+        if(!this.authenticationManager.isAuth()){
+            throw new FailedAuthenticationException();
+        }
+
         RequestPaper requestPaper = this.createPaper();
         TTTC8434RRes response = this.httpRequester.call(requestPaper, TTTC8434RRes.class);
 
@@ -61,7 +68,7 @@ public class StockBalance {
      *
      * @param message 전달 메시지
      */
-    private void sendMessageToUser(String message) throws Exception {
+    private void sendMessageToUser(String message) throws IOException, InterruptedException, FailedResponseException {
         SendMessageReq reqSendMessageReq = new SendMessageReq();
         reqSendMessageReq.setChatId(this.telegramConfig.getChatId());
         reqSendMessageReq.setText(message);
